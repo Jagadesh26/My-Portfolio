@@ -1,0 +1,1028 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ meta_description }}" />
+  <meta name="keywords" content="Full Stack Developer, Python, Django, REST API, PostgreSQL, WebSocket, Chennai, Jagadesh" />
+  <meta name="author" content="Jagadesh S" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page_title }}" />
+  <meta property="og:description" content="{{ meta_description }}" />
+  <meta property="og:type" content="website" />
+
+  <title>{{ page_title }}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary':   '#0B1120',
+            'bg-secondary': '#111827',
+            'bg-card':      '#1F2937',
+            'accent-blue':  '#3B82F6',
+            'accent-cyan':  '#06B6D4',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'portfolio/css/main.css' %}" />
+</head>
+<body>
+
+<!-- Animated Background Canvas -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<!-- Mouse Glow Effect -->
+<div class="mouse-glow" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Jagadesh S — Home">
+      Jagadesh<span>.</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#terminal">Terminal</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+    </ul>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#terminal">Terminal</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════ -->
+<section id="hero" aria-label="Introduction">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left: Content -->
+      <div class="hero-content">
+        <div class="hero-badge" role="status">Available for opportunities</div>
+
+        <h1 class="hero-name">
+          Jagadesh S<br/>
+          <!-- <span class="gradient-text">S</span> -->
+        </h1>
+
+        <p class="hero-role">
+          Full Stack Developer &mdash;
+          <span>Backend Engineering</span>
+        </p>
+
+        <p class="hero-summary">
+          Building secure, scalable enterprise applications with Python &amp; Django.
+          Specialized in high-performance REST APIs, real-time WebSocket systems,
+          and cloud-integrated backends that handle production scale reliably.
+        </p>
+
+        <div class="hero-tech-row" aria-label="Core technologies">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Django</span>
+          <span class="tech-badge">DRF</span>
+          <span class="tech-badge cyan">PostgreSQL</span>
+          <span class="tech-badge cyan">WebSocket</span>
+          <span class="tech-badge">Celery</span>
+          <span class="tech-badge cyan">Docker</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="{% static 'portfolio/images/Jagadesh-Resume.pdf' %}"
+             download="Jagadesh-S-Resume.pdf"
+             class="btn btn-primary"
+             aria-label="Download resume PDF">
+            ↓ Download Resume
+          </a>
+          <a href="#projects" class="btn btn-secondary">View Projects</a>
+          <a href="#contact"  class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+
+      <!-- Right: Visual -->
+      <div class="hero-visual">
+        <div class="profile-frame" aria-hidden="true">
+          <div class="profile-glow-ring"></div>
+          <div class="profile-img-wrap">
+            <img src="{% static 'portfolio/images/profile.jpg' %}"
+                 alt="Jagadesh S — Full Stack Developer"
+                 width="220" height="220"
+                 loading="eager" />
+          </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="hero-metrics" role="list" aria-label="Engineering metrics">
+          <div class="metric-card reveal" role="listitem">
+            <div class="metric-value" data-count="12" data-suffix="+">12+</div>
+            <div class="metric-label">Production APIs</div>
+          </div>
+          <div class="metric-card reveal reveal-delay-1" role="listitem">
+            <div class="metric-value" data-count="500" data-suffix="+">500+</div>
+            <div class="metric-label">Concurrent Users</div>
+          </div>
+          <div class="metric-card reveal reveal-delay-2" role="listitem">
+            <div class="metric-value" data-count="50" data-suffix="K+">50K+</div>
+            <div class="metric-label">Events / Day</div>
+          </div>
+          <div class="metric-card reveal reveal-delay-3" role="listitem">
+            <div class="metric-value" data-count="40" data-suffix="%">40%</div>
+            <div class="metric-label">Perf. Gains</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     ABOUT SECTION
+════════════════════════════════════════ -->
+<section id="about" class="section" aria-label="About me">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left: Info Card -->
+      <div class="about-info-block reveal" aria-label="Personal information">
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">👤</div>
+          <div>
+            <div class="info-label">Name</div>
+            <div class="info-value">Jagadesh S</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">💼</div>
+          <div>
+            <div class="info-label">Current Role</div>
+            <div class="info-value">Backend Developer · Emayam Technologies</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">📅</div>
+          <div>
+            <div class="info-label">Experience</div>
+            <div class="info-value">1+ Years in Production Engineering</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">Chennai, Tamil Nadu, India</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">
+              <a href="mailto:jagadesh2623@gmail.com">jagadesh2623@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">🔗</div>
+          <div>
+            <div class="info-label">LinkedIn</div>
+            <div class="info-value">
+              <a href="https://linkedin.com/in/jagadesh-s-030006218/" target="_blank" rel="noopener">linkedin.com/in/jagadesh-s</a>
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">⚡</div>
+          <div>
+            <div class="info-label">Primary Stack</div>
+            <div class="info-value">Python · Django · DRF · PostgreSQL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="about-content reveal reveal-delay-1">
+        <div class="section-label">About</div>
+        <h2 class="section-title">
+          Engineering Systems<br/>
+          <span class="gradient-text">That Scale</span>
+        </h2>
+
+        <p class="about-text">
+          I'm a Full Stack Developer focused on building enterprise-grade backend systems that are
+          secure, performant, and maintainable. With 1+ year of hands-on production experience at
+          Emayam Technologies, I've gone from architecting multi-module REST APIs to deploying
+          real-time WebSocket systems that serve hundreds of concurrent users daily.
+        </p>
+
+        <p class="about-text">
+          My approach is always backend-first: I think about data models, API contracts, and
+          performance constraints before writing a line of code. I've tuned PostgreSQL and MySQL
+          queries across million-record datasets, designed Celery task pipelines with near-zero
+          failure rates, and integrated enterprise cloud storage APIs across production applications.
+        </p>
+
+        <div class="highlight-box" role="note">
+          <strong style="color: var(--accent-blue);">Currently focused on:</strong> Deepening expertise
+          in distributed systems architecture, cloud-native backend patterns, and scalable data
+          pipelines using PySpark — while continuing to ship production-quality Django applications.
+        </div>
+
+        <div class="focus-tags" aria-label="Current focus areas">
+          <span class="focus-tag">REST APIs</span>
+          <span class="focus-tag">WebSocket Systems</span>
+          <span class="focus-tag">PostgreSQL Optimization</span>
+          <span class="focus-tag">Celery Automation</span>
+          <span class="focus-tag">Cloud Integrations</span>
+          <span class="focus-tag">Open To Opportunities ✓</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     SKILLS SECTION
+════════════════════════════════════════ -->
+<section id="skills" class="section" aria-label="Skills and technologies">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Tech Stack</div>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+      <p class="section-subtitle">
+        Hands-on expertise across the full stack — from backend API design to DevOps deployment.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Backend -->
+      <div class="skill-category reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon blue" aria-hidden="true">⚙️</div>
+          <div>
+            <div class="skill-cat-title">Backend Development</div>
+            <div class="skill-cat-count">4 technologies</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>Python</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>Django &amp; DRF</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>Flask</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>REST API Design</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frontend -->
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon cyan" aria-hidden="true">🎨</div>
+          <div>
+            <div class="skill-cat-title">Frontend</div>
+            <div class="skill-cat-count">3 technologies</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot cyan"></span>HTML5 &amp; CSS3</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot cyan"></span>JavaScript (ES6+)</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot cyan"></span>Django Templates</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon purple" aria-hidden="true">🗄️</div>
+          <div>
+            <div class="skill-cat-title">Databases</div>
+            <div class="skill-cat-count">2 technologies</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot purple"></span>PostgreSQL</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot purple"></span>MySQL</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot purple"></span>SQLite</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="skill-category reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon green" aria-hidden="true">🚀</div>
+          <div>
+            <div class="skill-cat-title">DevOps &amp; Infrastructure</div>
+            <div class="skill-cat-count">5 technologies</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot green"></span>Docker</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot green"></span>Git &amp; GitHub</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot green"></span>Linux</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot green"></span>CapRover</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Engineering -->
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon orange" aria-hidden="true">🔧</div>
+          <div>
+            <div class="skill-cat-title">Core Engineering</div>
+            <div class="skill-cat-count">6 specializations</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot orange"></span>JWT Auth &amp; RBAC</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot orange"></span>WebSocket / Channels</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot orange"></span>Celery &amp; Beat</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot orange"></span>Cloud Storage APIs</span>
+            <span class="skill-level advanced">Advanced</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot orange"></span>Payment Gateway APIs</span>
+            <span class="skill-level intermediate">Intermediate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Engineering -->
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon pink" aria-hidden="true">📊</div>
+          <div>
+            <div class="skill-cat-title">Data Engineering</div>
+            <div class="skill-cat-count">2 technologies</div>
+          </div>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>PySpark</span>
+            <span class="skill-level foundational">Foundational</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>Hadoop</span>
+            <span class="skill-level foundational">Foundational</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name"><span class="skill-dot blue"></span>Data Pipelines</span>
+            <span class="skill-level foundational">Foundational</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     EXPERIENCE SECTION
+════════════════════════════════════════ -->
+<section id="experience" class="section" aria-label="Professional experience">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">
+        Professional<br/>
+        <span class="gradient-text">Impact</span>
+      </h2>
+      <p class="section-subtitle">
+        Not just responsibilities — measurable engineering outcomes delivered in production.
+      </p>
+    </div>
+
+    <div class="experience-card reveal">
+      <!-- Header -->
+      <div class="exp-header">
+        <div class="exp-company">
+          <div class="exp-logo" aria-hidden="true">ET</div>
+          <div>
+            <div class="exp-title">Backend Developer</div>
+            <div class="exp-company-name">Emayam Technologies Pvt Ltd</div>
+          </div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-badge-current">Current</span>
+          <span class="exp-duration">📅 Mar 2025 – Present</span>
+          <span class="exp-location">📍 Chennai, India</span>
+        </div>
+      </div>
+
+      <!-- Impact Grid -->
+      <div class="exp-impact-grid">
+        <div class="impact-item">
+          <div class="impact-header">
+            <span class="impact-icon">🔐</span>
+            <span class="impact-title">Secure API Architecture</span>
+          </div>
+          <p class="impact-desc">
+            Engineered <span class="impact-stat">12-module</span> production REST APIs with JWT &amp; RBAC,
+            serving <span class="impact-stat">500+ concurrent users</span> with zero unauthorized access incidents.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-header">
+            <span class="impact-icon">⚡</span>
+            <span class="impact-title">Performance Optimization</span>
+          </div>
+          <p class="impact-desc">
+            Reduced API response latency by <span class="impact-stat">40%</span> — from 650ms to 390ms —
+            by rewriting and indexing SQL queries across <span class="impact-stat">1M+ record</span> datasets.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-header">
+            <span class="impact-icon">🔄</span>
+            <span class="impact-title">Real-Time &amp; Async Systems</span>
+          </div>
+          <p class="impact-desc">
+            Built WebSocket-powered real-time chat and Celery Beat automation, cutting background
+            job failure rate by <span class="impact-stat">90%</span> and eliminating manual scheduling.
+          </p>
+        </div>
+
+        <div class="impact-item">
+          <div class="impact-header">
+            <span class="impact-icon">☁️</span>
+            <span class="impact-title">Cloud Storage Integration</span>
+          </div>
+          <p class="impact-desc">
+            Integrated Nextcloud &amp; Google Cloud Storage across <span class="impact-stat">8 modules</span>,
+            reducing manual file-handling time by <span class="impact-stat">75%</span> system-wide.
+          </p>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="exp-achievements">
+        <h4>Engineering Highlights</h4>
+        <ul class="achievement-list">
+          <li>Architected reusable backend module patterns and Python monitoring utilities, eliminating 35% of code duplication across 2 active product lines.</li>
+          <li>Implemented Python EXE-based system monitoring agent for the Employee Monitoring Platform, enabling screenshot capture and application usage tracking at scale.</li>
+          <li>Accelerated feature delivery velocity by 20% through standardized API contracts and reusable authentication middleware.</li>
+          <li>Technologies: Python · Django · DRF · PostgreSQL · MySQL · WebSocket · Celery · Celery Beat · Nextcloud · Google Cloud Storage · JWT · RBAC · Docker</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     PROJECTS SECTION
+════════════════════════════════════════ -->
+<section id="projects" class="section" aria-label="Featured projects">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">
+        What I've<br/>
+        <span class="gradient-text">Built</span>
+      </h2>
+      <p class="section-subtitle">
+        Production systems with real users, real constraints, and measurable outcomes.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: Employee Monitoring System -->
+      <article class="project-card reveal" aria-label="Employee Monitoring System">
+        <div class="project-header">
+          <div class="project-number">Project 01</div>
+          <h3 class="project-title">Employee Monitoring System</h3>
+          <div class="project-tag-row">
+            <span class="project-tag blue">Python</span>
+            <span class="project-tag blue">Django</span>
+            <span class="project-tag cyan">WebSocket</span>
+            <span class="project-tag purple">Celery</span>
+            <span class="project-tag green">Nextcloud</span>
+          </div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-section">
+            <h4>📋 Overview</h4>
+            <p>Full-stack employee productivity monitoring platform with real-time activity tracking,
+            automated reporting, and cloud-backed storage — built to scale to enterprise teams.</p>
+          </div>
+
+          <div class="project-section">
+            <h4>🎯 Problem &amp; Solution</h4>
+            <p>Organizations lacked visibility into remote employee productivity. Built a Django REST
+            backend that processes 50,000+ activity events daily via a Python EXE monitoring agent,
+            with Celery Beat handling all scheduled reporting automatically.</p>
+          </div>
+
+          <div class="project-section">
+            <h4>✨ Key Features</h4>
+            <ul class="feature-list">
+              <li>Screenshot capture &amp; screen recording via Python EXE agent</li>
+              <li>Application usage tracking &amp; performance scoring via REST APIs</li>
+              <li>Real-time chat powered by Django Channels / WebSocket</li>
+              <li>Nextcloud integration for secure cloud file storage</li>
+              <li>Automated Celery Beat scheduled reporting pipeline</li>
+            </ul>
+          </div>
+
+          <div class="project-section">
+            <h4>⚡ Engineering Challenges</h4>
+            <div class="challenge-item">High-frequency event ingestion (50K+ daily) required optimized DB write batching and async task queuing to prevent API bottlenecks.</div>
+            <div class="challenge-item">Python EXE agent needed cross-platform reliability for screenshot and recording capture with minimal CPU overhead.</div>
+          </div>
+
+          <div class="project-section">
+            <h4>📊 Business Impact</h4>
+            <div class="metrics-row">
+              <div class="metric-pill">
+                <div class="val">50K+</div>
+                <div class="lbl">Events/Day</div>
+              </div>
+              <div class="metric-pill">
+                <div class="val">90%</div>
+                <div class="lbl">Job Failure Reduction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <button class="btn btn-secondary" style="font-size:13px; padding: 9px 18px;" disabled aria-label="Source code private">
+            🔒 Private Repo
+          </button>
+          <button class="btn btn-outline" style="font-size:13px; padding: 9px 18px;" disabled aria-label="Live demo not available">
+            📊 Enterprise App
+          </button>
+        </div>
+      </article>
+
+      <!-- Project 2: Real Estate PMS -->
+      <article class="project-card reveal reveal-delay-1" aria-label="Real Estate Property Management System">
+        <div class="project-header alt">
+          <div class="project-number">Project 02</div>
+          <h3 class="project-title">Real Estate Property Management</h3>
+          <div class="project-tag-row">
+            <span class="project-tag blue">Python</span>
+            <span class="project-tag blue">Django</span>
+            <span class="project-tag purple">PostgreSQL</span>
+            <span class="project-tag cyan">MySQL</span>
+            <span class="project-tag green">Nextcloud</span>
+          </div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-section">
+            <h4>📋 Overview</h4>
+            <p>Multi-role property management portal with distinct dashboards for Buyers, Sellers,
+            Customers, and Super Admins — backed by optimized APIs and automated data integrity pipelines.</p>
+          </div>
+
+          <div class="project-section">
+            <h4>🎯 Problem &amp; Solution</h4>
+            <p>Property management platforms typically suffer from slow searches and brittle data
+            pipelines. Rebuilt the backend query layer with targeted indexing and query rewrites,
+            cutting read latency by 35% across large property listing datasets.</p>
+          </div>
+
+          <div class="project-section">
+            <h4>✨ Key Features</h4>
+            <ul class="feature-list">
+              <li>Multi-role RBAC dashboard system (Buyer · Seller · Customer · Admin)</li>
+              <li>Property listing, advanced search &amp; filter APIs</li>
+              <li>Cloud storage pipelines for image &amp; video assets via Nextcloud</li>
+              <li>Automated PostgreSQL backup &amp; restore routines</li>
+              <li>Dual-DB architecture: PostgreSQL + MySQL with abstraction layer</li>
+            </ul>
+          </div>
+
+          <div class="project-section">
+            <h4>⚡ Engineering Challenges</h4>
+            <div class="challenge-item">Dual-database architecture (PostgreSQL + MySQL) required careful abstraction to avoid ORM quirks and ensure consistent behavior across both engines.</div>
+            <div class="challenge-item">Advanced property search across large datasets needed composite indexes and query plan analysis to maintain sub-200ms response times.</div>
+          </div>
+
+          <div class="project-section">
+            <h4>📊 Business Impact</h4>
+            <div class="metrics-row">
+              <div class="metric-pill">
+                <div class="val">35%</div>
+                <div class="lbl">Query Speed Gain</div>
+              </div>
+              <div class="metric-pill">
+                <div class="val">4</div>
+                <div class="lbl">Distinct User Roles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <button class="btn btn-secondary" style="font-size:13px; padding: 9px 18px;" disabled aria-label="Source code private">
+            🔒 Private Repo
+          </button>
+          <button class="btn btn-outline" style="font-size:13px; padding: 9px 18px;" disabled aria-label="Enterprise application">
+            🏢 Enterprise App
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     TERMINAL SECTION
+════════════════════════════════════════ -->
+<section id="terminal" class="section" style="padding: 80px 0;" aria-label="Developer terminal">
+  <div class="container">
+    <div class="reveal" style="text-align: center; margin-bottom: 40px;">
+      <div class="section-label" style="justify-content: center;">Terminal</div>
+      <h2 class="section-title">The Dev Perspective</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">A quick session in the command line.</p>
+    </div>
+
+    <div class="terminal-wrap reveal">
+      <div class="terminal-window" role="region" aria-label="Interactive terminal display">
+        <div class="terminal-titlebar" aria-hidden="true">
+          <div class="terminal-dots">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+          </div>
+          <div class="terminal-title">jagadesh@portfolio:~</div>
+        </div>
+        <div class="terminal-body" id="terminal-body" aria-live="polite" aria-label="Terminal output"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     EDUCATION SECTION
+════════════════════════════════════════ -->
+<section id="education" class="section" aria-label="Educational background">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Education</div>
+      <h2 class="section-title">Academic Foundation</h2>
+      <p class="section-subtitle">
+        Computer Applications graduate with strong algorithmic and systems thinking foundations.
+      </p>
+    </div>
+
+    <div class="education-grid">
+
+      <div class="edu-card reveal" role="article" aria-label="Master of Computer Applications">
+        <div class="edu-degree">MCA</div>
+        <div class="edu-college">D.G. Vaishnav College</div>
+        <div class="edu-college" style="font-size: 13px; color: var(--text-muted); font-weight: 400;">
+          Master of Computer Applications
+        </div>
+        <div class="edu-meta" style="margin-top: 12px;">
+          <div class="edu-meta-item">
+            <span aria-hidden="true">📍</span> Chennai
+          </div>
+          <div class="edu-meta-item">
+            <span aria-hidden="true">📅</span> 2022 – 2024
+          </div>
+        </div>
+        <div class="edu-cgpa">
+          <span aria-hidden="true">⭐</span> CGPA 7.22 / 10
+        </div>
+      </div>
+
+      <div class="edu-card reveal reveal-delay-1" role="article" aria-label="Bachelor of Computer Applications">
+        <div class="edu-degree">BCA</div>
+        <div class="edu-college">Patrician College of Arts &amp; Science</div>
+        <div class="edu-college" style="font-size: 13px; color: var(--text-muted); font-weight: 400;">
+          Bachelor of Computer Applications
+        </div>
+        <div class="edu-meta" style="margin-top: 12px;">
+          <div class="edu-meta-item">
+            <span aria-hidden="true">📍</span> Chennai
+          </div>
+          <div class="edu-meta-item">
+            <span aria-hidden="true">📅</span> 2019 – 2022
+          </div>
+        </div>
+        <div class="edu-cgpa">
+          <span aria-hidden="true">⭐</span> CGPA 7.22 / 10
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ════════════════════════════════════════
+     CONTACT SECTION
+════════════════════════════════════════ -->
+<section id="contact" class="section" aria-label="Contact me">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">
+        Let's Build<br/>
+        <span class="gradient-text">Something Great</span>
+      </h2>
+      <p class="section-subtitle">
+        Open to full-time roles, contract work, and interesting engineering challenges.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Info -->
+      <div class="contact-info">
+        <div class="contact-item reveal">
+          <div class="contact-item-icon" aria-hidden="true">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">
+              <a href="mailto:jagadesh2623@gmail.com">jagadesh2623@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-1">
+          <div class="contact-item-icon" aria-hidden="true">🔗</div>
+          <div>
+            <div class="contact-item-label">LinkedIn</div>
+            <div class="contact-item-value">
+              <a href="https://linkedin.com/in/jagadesh-s-030006218/" target="_blank" rel="noopener">
+                linkedin.com/in/jagadesh-s
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item reveal reveal-delay-2">
+          <div class="contact-item-icon" aria-hidden="true">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Chennai, Tamil Nadu, India</div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3" style="padding: 0 4px;">
+          <a href="{% static 'portfolio/images/Jagadesh-Resume.pdf' %}"
+             download="Jagadesh-S-Resume.pdf"
+             class="btn btn-primary"
+             style="width: 100%; justify-content: center;"
+             aria-label="Download resume PDF">
+            ↓ Download Resume
+          </a>
+          <div class="open-badge" style="width: 100%; justify-content: center; margin-top: 12px;">
+            Open To Full-Time &amp; Contract Roles
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form-wrap reveal reveal-delay-1">
+        <div class="form-title">Send a Message</div>
+        <p class="form-subtitle">I'll get back to you within 24 hours.</p>
+
+        <form id="contact-form" novalidate aria-label="Contact form">
+          {% csrf_token %}
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="id_name">Name</label>
+              <input type="text"
+                     id="id_name"
+                     name="name"
+                     class="form-control"
+                     placeholder="Your name"
+                     required
+                     autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="id_email">Email</label>
+              <input type="email"
+                     id="id_email"
+                     name="email"
+                     class="form-control"
+                     placeholder="your@email.com"
+                     required
+                     autocomplete="email" />
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="id_subject">Subject</label>
+              <input type="text"
+                     id="id_subject"
+                     name="subject"
+                     class="form-control"
+                     placeholder="What's this about?"
+                     required />
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="id_message">Message</label>
+              <textarea id="id_message"
+                        name="message"
+                        class="form-control"
+                        placeholder="Tell me about your project or opportunity..."
+                        required
+                        rows="5"></textarea>
+            </div>
+          </div>
+
+          <button type="submit"
+                  id="form-submit"
+                  class="btn btn-primary"
+                  style="width: 100%; justify-content: center; margin-top: 4px;">
+            Send Message →
+          </button>
+          <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size: 20px;">Jagadesh<span style="color: var(--accent-blue);">.</span></div>
+        <p>
+          Full Stack Developer based in Chennai.
+          Building scalable, secure backend systems with Python &amp; Django.
+          Open to engineering opportunities.
+        </p>
+        <div class="footer-social" aria-label="Social links">
+          <a href="https://linkedin.com/in/jagadesh-s-030006218/"
+             target="_blank" rel="noopener"
+             class="social-link"
+             aria-label="LinkedIn profile">in</a>
+          <a href="mailto:jagadesh2623@gmail.com"
+             class="social-link"
+             aria-label="Email Jagadesh">✉</a>
+          <a href="{% static 'portfolio/images/Jagadesh-Resume.pdf' %}"
+             download="Jagadesh-S-Resume.pdf"
+             class="social-link"
+             aria-label="Download resume">↓</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-heading">Stack</div>
+        <ul class="footer-links" role="list">
+          <li><a href="#skills">Python · Django</a></li>
+          <li><a href="#skills">DRF · REST APIs</a></li>
+          <li><a href="#skills">PostgreSQL · MySQL</a></li>
+          <li><a href="#skills">WebSocket · Celery</a></li>
+          <li><a href="#skills">Docker · Linux</a></li>
+          <li><a href="{% static 'portfolio/images/Jagadesh-Resume.pdf' %}" download>Download Resume</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; 2025 Jagadesh S. Built with Django &amp; Tailwind CSS. Deployed on CapRover.
+      </p>
+      <button class="back-to-top" id="back-to-top" aria-label="Scroll back to top">
+        ↑ Back to top
+      </button>
+    </div>
+  </div>
+</footer>
+
+<!-- Main JS -->
+<script src="{% static 'portfolio/js/main.js' %}"></script>
+</body>
+</html>
+
+
