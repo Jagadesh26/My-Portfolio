@@ -120,9 +120,7 @@ DEFAULT_FROM_EMAIL = env(
     default=EMAIL_HOST_USER
 )
 
-# ── WhiteNoise (static files in production) ──
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # ── Security Settings for Production ──
 if not DEBUG:
