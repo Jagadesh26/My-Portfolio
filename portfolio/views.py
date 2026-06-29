@@ -1,5 +1,6 @@
 import json
 import logging
+import threading
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -10,6 +11,73 @@ from django.views.decorators.http import require_POST
 from .models import ContactMessage
 
 logger = logging.getLogger(__name__)
+
+
+def _send_contact_emails(name, visitor_email, subject, message):
+    owner_subject = f"Portfolio Contact: {subject}"
+    owner_body = f"""
+You have received a new portfolio enquiry.
+
+---------------------------------------
+Name      : {name}
+Email     : {visitor_email}
+Subject   : {subject}
+---------------------------------------
+
+Message:
+
+{message}
+
+"""
+
+    visitor_subject = "Thank you for contacting Jagadesh"
+    visitor_body = f"""Hi {name},
+
+Thank you! Your message has been received.
+
+I have received your enquiry about "{subject}" and will get back to you soon.
+
+Best regards,
+Jagadesh S
+"""
+
+    messages = [
+        EmailMessage(
+            subject=owner_subject,
+            body=owner_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.EMAIL_HOST_USER],
+            reply_to=[visitor_email],
+        ),
+        EmailMessage(
+            subject=visitor_subject,
+            body=visitor_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[visitor_email],
+            reply_to=[settings.EMAIL_HOST_USER],
+        ),
+    ]
+
+    for email in messages:
+        email.send(fail_silently=False)
+
+
+def _queue_contact_emails(name, visitor_email, subject, message):
+    if getattr(settings, "CONTACT_EMAIL_ASYNC", True):
+        def send_safely():
+            try:
+                _send_contact_emails(name, visitor_email, subject, message)
+            except Exception:
+                logger.exception("Queued contact email sending failed.")
+
+        thread = threading.Thread(
+            target=send_safely,
+            daemon=True,
+        )
+        thread.start()
+        return
+
+    _send_contact_emails(name, visitor_email, subject, message)
 
 
 def index(request):
@@ -58,31 +126,8 @@ def contact(request):
             message=message,
         )
 
-        email_subject = f"Portfolio Contact: {subject}"
-        email_body = f"""
-You have received a new portfolio enquiry.
-
----------------------------------------
-Name      : {name}
-Email     : {visitor_email}
-Subject   : {subject}
----------------------------------------
-
-Message:
-
-{message}
-
-"""
-
         try:
-            mail = EmailMessage(
-                subject=email_subject,
-                body=email_body,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[settings.EMAIL_HOST_USER],
-                reply_to=[visitor_email],
-            )
-            mail.send(fail_silently=False)
+            _queue_contact_emails(name, visitor_email, subject, message)
         except Exception as exc:
             logger.exception("Email sending failed.")
             return JsonResponse(
@@ -98,7 +143,7 @@ Message:
         return JsonResponse(
             {
                 "success": True,
-                "message": "Thank you! Your message has been received. I'll get back to you soon.",
+                "message": "✅ Thank you! Your message has been received.",
             }
         )
 

@@ -287,7 +287,7 @@
 
       if (res.ok && json.success) {
         status.className  = 'form-status success';
-        status.textContent = '✓ ' + json.message;
+        status.textContent = json.message || '✅ Thank you! Your message has been received.';
         form.reset();
       } else {
         throw new Error(json.error || 'Something went wrong.');

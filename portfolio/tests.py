@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import ContactMessage
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class ContactViewTests(TestCase):
     def post_contact(self):
         return self.client.post(
@@ -28,16 +29,20 @@ class ContactViewTests(TestCase):
         EMAIL_HOST_USER="owner@example.com",
         EMAIL_HOST_PASSWORD="secret",
         DEFAULT_FROM_EMAIL="owner@example.com",
+        CONTACT_EMAIL_ASYNC=False,
     )
-    def test_contact_sends_email_and_returns_success(self):
+    def test_contact_sends_owner_and_visitor_emails_and_returns_success(self):
         response = self.post_contact()
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["success"], True)
+        self.assertEqual(response.json()["message"], "✅ Thank you! Your message has been received.")
         self.assertEqual(ContactMessage.objects.count(), 1)
-        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, ["owner@example.com"])
         self.assertEqual(mail.outbox[0].reply_to, ["visitor@example.com"])
+        self.assertEqual(mail.outbox[1].to, ["visitor@example.com"])
+        self.assertIn("Thank you! Your message has been received.", mail.outbox[1].body)
 
     @override_settings(EMAIL_HOST_USER="", EMAIL_HOST_PASSWORD="")
     def test_contact_returns_error_when_email_is_not_configured(self):
@@ -52,6 +57,7 @@ class ContactViewTests(TestCase):
         EMAIL_HOST_USER="owner@example.com",
         EMAIL_HOST_PASSWORD="secret",
         DEFAULT_FROM_EMAIL="owner@example.com",
+        CONTACT_EMAIL_ASYNC=False,
     )
     @patch("portfolio.views.EmailMessage.send", side_effect=Exception("SMTP failed"))
     def test_contact_returns_error_when_email_send_fails(self, mocked_send):
